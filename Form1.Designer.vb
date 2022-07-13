@@ -27,6 +27,7 @@ Partial Class FrmToDo
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.GroupBoxForm = New System.Windows.Forms.GroupBox()
+        Me.TxtID = New System.Windows.Forms.TextBox()
         Me.StatusComboBox = New System.Windows.Forms.ComboBox()
         Me.MskDate = New System.Windows.Forms.MaskedTextBox()
         Me.TxtCateg = New System.Windows.Forms.TextBox()
@@ -39,6 +40,7 @@ Partial Class FrmToDo
         Me.LabelAtiv = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.ColumnHeader6 = New System.Windows.Forms.ColumnHeader()
         Me.ColumnHeader1 = New System.Windows.Forms.ColumnHeader()
         Me.ColumnHeader2 = New System.Windows.Forms.ColumnHeader()
         Me.ColumnHeader3 = New System.Windows.Forms.ColumnHeader()
@@ -65,6 +67,7 @@ Partial Class FrmToDo
         '
         'GroupBoxForm
         '
+        Me.GroupBoxForm.Controls.Add(Me.TxtID)
         Me.GroupBoxForm.Controls.Add(Me.StatusComboBox)
         Me.GroupBoxForm.Controls.Add(Me.MskDate)
         Me.GroupBoxForm.Controls.Add(Me.TxtCateg)
@@ -77,9 +80,18 @@ Partial Class FrmToDo
         Me.GroupBoxForm.Controls.Add(Me.LabelAtiv)
         Me.GroupBoxForm.Location = New System.Drawing.Point(12, 118)
         Me.GroupBoxForm.Name = "GroupBoxForm"
-        Me.GroupBoxForm.Size = New System.Drawing.Size(499, 325)
+        Me.GroupBoxForm.Size = New System.Drawing.Size(398, 325)
         Me.GroupBoxForm.TabIndex = 0
         Me.GroupBoxForm.TabStop = False
+        '
+        'TxtID
+        '
+        Me.TxtID.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TxtID.Location = New System.Drawing.Point(327, 16)
+        Me.TxtID.Multiline = True
+        Me.TxtID.Name = "TxtID"
+        Me.TxtID.Size = New System.Drawing.Size(46, 27)
+        Me.TxtID.TabIndex = 11
         '
         'StatusComboBox
         '
@@ -89,7 +101,7 @@ Partial Class FrmToDo
         Me.StatusComboBox.Location = New System.Drawing.Point(124, 238)
         Me.StatusComboBox.Name = "StatusComboBox"
         Me.StatusComboBox.Size = New System.Drawing.Size(197, 28)
-        Me.StatusComboBox.TabIndex = 10
+        Me.StatusComboBox.TabIndex = 5
         '
         'MskDate
         '
@@ -97,34 +109,34 @@ Partial Class FrmToDo
         Me.MskDate.Mask = "00/00/0000 00:00"
         Me.MskDate.Name = "MskDate"
         Me.MskDate.Size = New System.Drawing.Size(197, 27)
-        Me.MskDate.TabIndex = 9
+        Me.MskDate.TabIndex = 3
         '
         'TxtCateg
         '
         Me.TxtCateg.Location = New System.Drawing.Point(124, 203)
         Me.TxtCateg.Name = "TxtCateg"
         Me.TxtCateg.Size = New System.Drawing.Size(197, 27)
-        Me.TxtCateg.TabIndex = 8
+        Me.TxtCateg.TabIndex = 4
         '
         'TxtDesc
         '
         Me.TxtDesc.Location = New System.Drawing.Point(124, 53)
         Me.TxtDesc.Multiline = True
         Me.TxtDesc.Name = "TxtDesc"
-        Me.TxtDesc.Size = New System.Drawing.Size(370, 106)
-        Me.TxtDesc.TabIndex = 6
+        Me.TxtDesc.Size = New System.Drawing.Size(268, 106)
+        Me.TxtDesc.TabIndex = 2
         '
         'TxtAtiv
         '
         Me.TxtAtiv.Location = New System.Drawing.Point(124, 16)
         Me.TxtAtiv.Name = "TxtAtiv"
         Me.TxtAtiv.Size = New System.Drawing.Size(197, 27)
-        Me.TxtAtiv.TabIndex = 5
+        Me.TxtAtiv.TabIndex = 1
         '
         'LabelStatus
         '
         Me.LabelStatus.AutoSize = True
-        Me.LabelStatus.Location = New System.Drawing.Point(66, 246)
+        Me.LabelStatus.Location = New System.Drawing.Point(66, 238)
         Me.LabelStatus.Name = "LabelStatus"
         Me.LabelStatus.Size = New System.Drawing.Size(52, 20)
         Me.LabelStatus.TabIndex = 4
@@ -133,16 +145,16 @@ Partial Class FrmToDo
         'LabelCateg
         '
         Me.LabelCateg.AutoSize = True
-        Me.LabelCateg.Location = New System.Drawing.Point(76, 210)
+        Me.LabelCateg.Location = New System.Drawing.Point(41, 203)
         Me.LabelCateg.Name = "LabelCateg"
-        Me.LabelCateg.Size = New System.Drawing.Size(42, 20)
+        Me.LabelCateg.Size = New System.Drawing.Size(77, 20)
         Me.LabelCateg.TabIndex = 3
-        Me.LabelCateg.Text = "Tipo:"
+        Me.LabelCateg.Text = "Categoria:"
         '
         'LabelDate
         '
         Me.LabelDate.AutoSize = True
-        Me.LabelDate.Location = New System.Drawing.Point(27, 172)
+        Me.LabelDate.Location = New System.Drawing.Point(27, 165)
         Me.LabelDate.Name = "LabelDate"
         Me.LabelDate.Size = New System.Drawing.Size(91, 20)
         Me.LabelDate.TabIndex = 2
@@ -151,7 +163,7 @@ Partial Class FrmToDo
         'LabelDesc
         '
         Me.LabelDesc.AutoSize = True
-        Me.LabelDesc.Location = New System.Drawing.Point(41, 60)
+        Me.LabelDesc.Location = New System.Drawing.Point(41, 53)
         Me.LabelDesc.Name = "LabelDesc"
         Me.LabelDesc.Size = New System.Drawing.Size(77, 20)
         Me.LabelDesc.TabIndex = 1
@@ -160,7 +172,7 @@ Partial Class FrmToDo
         'LabelAtiv
         '
         Me.LabelAtiv.AutoSize = True
-        Me.LabelAtiv.Location = New System.Drawing.Point(42, 23)
+        Me.LabelAtiv.Location = New System.Drawing.Point(42, 16)
         Me.LabelAtiv.Name = "LabelAtiv"
         Me.LabelAtiv.Size = New System.Drawing.Size(76, 20)
         Me.LabelAtiv.TabIndex = 0
@@ -168,13 +180,18 @@ Partial Class FrmToDo
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
-        Me.ListView1.Location = New System.Drawing.Point(517, 25)
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader6, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.ListView1.FullRowSelect = True
+        Me.ListView1.Location = New System.Drawing.Point(419, 25)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(621, 429)
-        Me.ListView1.TabIndex = 3
+        Me.ListView1.Size = New System.Drawing.Size(719, 429)
+        Me.ListView1.TabIndex = 6
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "ID"
         '
         'ColumnHeader1
         '
@@ -215,7 +232,7 @@ Partial Class FrmToDo
         Me.SalvarToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SalvarToolStripButton.Margin = New System.Windows.Forms.Padding(0)
         Me.SalvarToolStripButton.Name = "SalvarToolStripButton"
-        Me.SalvarToolStripButton.Size = New System.Drawing.Size(150, 79)
+        Me.SalvarToolStripButton.Size = New System.Drawing.Size(120, 79)
         Me.SalvarToolStripButton.Text = "&Salvar"
         Me.SalvarToolStripButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -229,7 +246,7 @@ Partial Class FrmToDo
         Me.ExcluirStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ExcluirStripButton1.Margin = New System.Windows.Forms.Padding(0)
         Me.ExcluirStripButton1.Name = "ExcluirStripButton1"
-        Me.ExcluirStripButton1.Size = New System.Drawing.Size(150, 79)
+        Me.ExcluirStripButton1.Size = New System.Drawing.Size(120, 79)
         Me.ExcluirStripButton1.Text = "Excluir"
         Me.ExcluirStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -242,7 +259,7 @@ Partial Class FrmToDo
         Me.AtualizarStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.AtualizarStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.AtualizarStripButton2.Name = "AtualizarStripButton2"
-        Me.AtualizarStripButton2.Size = New System.Drawing.Size(150, 79)
+        Me.AtualizarStripButton2.Size = New System.Drawing.Size(120, 79)
         Me.AtualizarStripButton2.Text = "Atualizar"
         Me.AtualizarStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -259,7 +276,7 @@ Partial Class FrmToDo
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalvarToolStripButton, Me.toolStripSeparator1, Me.ExcluirStripButton1, Me.ToolStripSeparator2, Me.AtualizarStripButton2})
         Me.ToolStrip.Location = New System.Drawing.Point(9, 19)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(497, 82)
+        Me.ToolStrip.Size = New System.Drawing.Size(407, 82)
         Me.ToolStrip.TabIndex = 2
         Me.ToolStrip.Text = "ToolStrip1"
         '
@@ -342,4 +359,6 @@ Partial Class FrmToDo
     Friend WithEvents ExcluirStripButton1 As ToolStripButton
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents AtualizarStripButton2 As ToolStripButton
+    Friend WithEvents ColumnHeader6 As ColumnHeader
+    Friend WithEvents TxtID As TextBox
 End Class
