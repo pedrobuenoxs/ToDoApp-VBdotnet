@@ -8,7 +8,7 @@
 
     Private Sub AtualizarStripButton2_Click(sender As Object, e As EventArgs) Handles AtualizarStripButton2.Click
 
-        If validateForm() Then
+        If ValidateForm() Then
             If TxtID.Text = "" Then
                 setRecord()
             End If
@@ -36,7 +36,7 @@
     End Sub
 
 
-    Private Function validateForm() As Boolean
+    Private Function ValidateForm() As Boolean
         Try
             If TxtAtiv.Text = "" Then
                 Throw New Exception()
@@ -75,5 +75,18 @@
 
     End Sub
 
+    Private Sub SalvarToolStripButton_Click(sender As Object, e As EventArgs) Handles SalvarToolStripButton.Click
+        Dim Repository As New RepositoryClass
+        Dim ObjRecord As New RepositoryClass.ObjRecord
 
+        ObjRecord.Ativ = TxtAtiv.Text
+        ObjRecord.Desc = TxtDesc.Text
+        ObjRecord.Data = MskDate.Text
+        ObjRecord.Categ = TxtCateg.Text
+        ObjRecord.Status = StatusComboBox.Text
+
+
+
+        Repository.GravarCliente(ObjRecord)
+    End Sub
 End Class
