@@ -1,23 +1,17 @@
 ﻿Public Class FrmToDo
-    Private Const ID = 0
-    Private Const Ativ = 1
-    Private Const Desc = 2
-    Private Const Data = 3
-    Private Const Categ = 4
-    Private Const Status = 5
 
-    Private Sub AtualizarStripButton2_Click(sender As Object, e As EventArgs) Handles AtualizarStripButton2.Click
+    Dim Repository As New RepositoryClass
 
-        If ValidateForm() Then
-            If TxtID.Text = "" Then
-                setRecord()
-            End If
-            'upDateRecord()
-        End If
 
-        clearForm()
+    Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        Dim Repository As New RepositoryClass
+        Dim dados = Repository.ListarAtividades()
+        dgvDados.DataSource = dados
+
 
     End Sub
+
+
 
     Private Sub clearForm()
         TxtID.Clear()
@@ -25,22 +19,16 @@
         TxtDesc.Clear()
         MskDate.Clear()
         TxtCateg.Clear()
+        MskHour.Clear()
         StatusComboBox.SelectedIndex = -1
 
     End Sub
 
-    Private Sub setRecord()
-        With ListView1
-            .Items.Add(New ListViewItem({New Date, TxtAtiv.Text, TxtDesc.Text, MskDate.Text, TxtCateg.Text, StatusComboBox.Text}))
-        End With
-    End Sub
 
 
     Private Function ValidateForm() As Boolean
         Try
             If TxtAtiv.Text = "" Then
-                Throw New Exception()
-            ElseIf Not IsDate(MskDate.Text) Then
                 Throw New Exception()
             ElseIf TxtDesc.Text = "" Then
                 Throw New Exception()
@@ -57,36 +45,96 @@
         Return True
     End Function
 
-    Private Sub ListView1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles ListView1.MouseDoubleClick
-        getRecordItem()
+
+    Private Sub dvgDados_CellMouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvDados.CellMouseDoubleClick
+        If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 0 Then
+            Dim selectedRow = dgvDados.Rows(e.RowIndex)
+            If IsDBNull(selectedRow.Cells("id").Value) Then
+                MsgBox("Selecione uma linha válida")
+            ElseIf IsDBNull(selectedRow.Cells("Atividade").Value) Then
+                MsgBox("Selecione uma linha válida")
+
+            ElseIf IsDBNull(selectedRow.Cells("Descrição").Value) Then
+                MsgBox("Selecione uma linha válida")
+
+            ElseIf IsDBNull(selectedRow.Cells("Data").Value) Then
+                MsgBox("Selecione uma linha válida")
+
+            ElseIf IsDBNull(selectedRow.Cells("Hora").Value) Then
+                MsgBox("Selecione uma linha válida")
+
+            ElseIf IsDBNull(selectedRow.Cells("Categoria").Value) Then
+                MsgBox("Selecione uma linha válida")
+
+            ElseIf IsDBNull(selectedRow.Cells("Status").Value) Then
+                MsgBox("Selecione uma linha válida")
+
+            Else
+                TxtID.Text = selectedRow.Cells("Id").Value
+                TxtAtiv.Text = selectedRow.Cells("Atividade").Value
+                TxtDesc.Text = selectedRow.Cells("Descrição").Value
+                MskDate.Text = selectedRow.Cells("Data").Value
+                MskHour.Text = selectedRow.Cells("Hora").Value.ToString()
+                TxtCateg.Text = selectedRow.Cells("Categoria").Value
+                StatusComboBox.Text = selectedRow.Cells("Status").Value
+
+            End If
+
+
+        End If
+
     End Sub
 
-    Private Sub getRecordItem()
-        With ListView1
+    Private Sub SaveToolStripButton_Click(sender As Object, e As EventArgs) Handles SaveToolStripButton.Click
+        Dim objRepository As New RepositoryClass.ObjRecord
+        objRepository.Ativ = TxtAtiv.Text
+        objRepository.Desc = TxtDesc.Text
+        objRepository.Data = MskDate.Text
+        objRepository.Hora = MskHour.Text.ToString()
+        objRepository.Categ = TxtCateg.Text
+        objRepository.Status = StatusComboBox.Text
+        'New DateTime(MskHour.Text).Parse("12:10")
+        If ValidateForm() Then
+            Repository.SalvarAtividade(objRepository)
+        End If
 
-            Dim Row = .Items.IndexOf(.SelectedItems(0))
-            TxtID.Text = .Items(Row).SubItems(ID).Text
-            TxtAtiv.Text = .Items(Row).SubItems(Ativ).Text
-            TxtDesc.Text = .Items(Row).SubItems(Desc).Text
-            MskDate.Text = .Items(Row).SubItems(Data).Text
-            TxtCateg.Text = .Items(Row).SubItems(Categ).Text
-            StatusComboBox.Text = .Items(Row).SubItems(Status).Text
-        End With
-
+        clearForm()
+        Dim dados = Repository.ListarAtividades()
+        dgvDados.DataSource = dados
     End Sub
 
-    Private Sub SalvarToolStripButton_Click(sender As Object, e As EventArgs) Handles SalvarToolStripButton.Click
-        Dim Repository As New RepositoryClass
-        Dim ObjRecord As New RepositoryClass.ObjRecord
+    Private Sub DeleteToolStripButton_Click(sender As Object, e As EventArgs) Handles DeleteToolStripButton.Click
+        Dim objRepository As New RepositoryClass.ObjRecord
+        objRepository.Id = TxtID.Text
+        If ValidateForm() Then
+            Repository.ExcluirAtividade(objRepository.Id)
+        End If
 
-        ObjRecord.Ativ = TxtAtiv.Text
-        ObjRecord.Desc = TxtDesc.Text
-        ObjRecord.Data = MskDate.Text
-        ObjRecord.Categ = TxtCateg.Text
-        ObjRecord.Status = StatusComboBox.Text
+        clearForm()
+        Dim dados = Repository.ListarAtividades()
+        dgvDados.DataSource = dados
+    End Sub
+
+    Private Sub EditToolStripButton_Click(sender As Object, e As EventArgs) Handles EditToolStripButton.Click
+
+        If ValidateForm() Then
+            If TxtID.Text = "" Then
+                MsgBox("Selecione uma atividade para editar")
+            End If
+            Dim objRepository As New RepositoryClass.ObjRecord
+            objRepository.Id = TxtID.Text
+            objRepository.Ativ = TxtAtiv.Text
+            objRepository.Desc = TxtDesc.Text
+            objRepository.Data = MskDate.Text
+            objRepository.Hora = MskHour.Text.ToString()
+            objRepository.Categ = TxtCateg.Text
+            objRepository.Status = StatusComboBox.Text
+            Repository.EditarAtividade(objRepository)
+        End If
 
 
-
-        Repository.GravarCliente(ObjRecord)
+        clearForm()
+        Dim dados = Repository.ListarAtividades()
+        dgvDados.DataSource = dados
     End Sub
 End Class
